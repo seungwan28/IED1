@@ -28,8 +28,8 @@
 
 // PID parameters
 #define _KP 2.0 
-#define _KI 0.4   
-#define _KD 42.0
+#define _KI 0.5   
+#define _KD 45.0
 
 //#define _INTERVAL_DIST 30  
 #define DELAY_MICROS  1000
@@ -114,7 +114,7 @@ void loop() {
         cur = _DIST_TARGET - dist_raw; 
         pterm = _KP * cur; 
         dterm = _KD * (cur - prev);
-        iterm = _KI * cur;
+        iterm += _KI * cur;
         //control = _KP * pterm + _KI * iterm +  _KD * dterm;
         if (abs(iterm) > 40) iterm = 0;
         control = pterm + dterm + iterm;
